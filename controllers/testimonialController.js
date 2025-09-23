@@ -21,7 +21,7 @@ const getTestimonials = async (req, res) => {
     console.error('Get testimonials error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні відгуків'
+      message: 'Server error while getting testimonials'
     });
   }
 };

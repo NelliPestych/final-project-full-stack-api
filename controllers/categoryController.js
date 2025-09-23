@@ -17,7 +17,7 @@ const getCategories = async (req, res) => {
     console.error('Get categories error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні категорій'
+      message: 'Server error while getting categories'
     });
   }
 };

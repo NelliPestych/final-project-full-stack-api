@@ -13,66 +13,66 @@ const HTTP_STATUS = {
 
 const ERROR_MESSAGES = {
   // Auth errors
-  INVALID_CREDENTIALS: 'Невірний email або пароль',
-  USER_ALREADY_EXISTS: 'Користувач з таким email вже існує',
+  INVALID_CREDENTIALS: 'Invalid email or password',
+  USER_ALREADY_EXISTS: 'User with this email already exists',
   TOKEN_REQUIRED: 'Access denied. No token provided.',
   TOKEN_INVALID: 'Token is not valid.',
   TOKEN_EXPIRED: 'Token expired',
   
   // User errors
-  USER_NOT_FOUND: 'Користувач не знайдений',
-  CANNOT_FOLLOW_SELF: 'Не можна підписатися на самого себе',
-  ALREADY_FOLLOWING: 'Ви вже підписані на цього користувача',
-  NOT_FOLLOWING: 'Ви не підписані на цього користувача',
+  USER_NOT_FOUND: 'User not found',
+  CANNOT_FOLLOW_SELF: 'Cannot follow yourself',
+  ALREADY_FOLLOWING: 'You are already following this user',
+  NOT_FOLLOWING: 'You are not following this user',
   
   // Recipe errors
-  RECIPE_NOT_FOUND: 'Рецепт не знайдений',
-  RECIPE_ALREADY_FAVORITE: 'Рецепт вже в улюблених',
-  RECIPE_NOT_FAVORITE: 'Рецепт не знайдений в улюблених',
-  RECIPE_PERMISSION_DENIED: 'Ви не маєте прав на цю дію з рецептом',
-  CATEGORY_NOT_FOUND: 'Категорія не знайдена',
-  AREA_NOT_FOUND: 'Регіон не знайдений',
+  RECIPE_NOT_FOUND: 'Recipe not found',
+  RECIPE_ALREADY_FAVORITE: 'Recipe already in favorites',
+  RECIPE_NOT_FAVORITE: 'Recipe not found in favorites',
+  RECIPE_PERMISSION_DENIED: 'You do not have permission for this recipe action',
+  CATEGORY_NOT_FOUND: 'Category not found',
+  AREA_NOT_FOUND: 'Area not found',
   
   // Validation errors
   VALIDATION_FAILED: 'Validation failed',
-  NAME_REQUIRED: 'Ім\'я обов\'язкове',
-  EMAIL_REQUIRED: 'Email обов\'язковий',
-  EMAIL_INVALID: 'Введіть валідний email',
-  PASSWORD_REQUIRED: 'Пароль обов\'язковий',
-  PASSWORD_TOO_SHORT: 'Пароль повинен містити мінімум 6 символів',
-  TITLE_REQUIRED: 'Назва рецепту обов\'язкова',
-  INSTRUCTIONS_REQUIRED: 'Інструкції обов\'язкові',
-  CATEGORY_REQUIRED: 'Категорія обов\'язкова',
-  AREA_REQUIRED: 'Регіон обов\'язковий',
-  TIME_INVALID: 'Час приготування повинен бути додатним числом',
+  NAME_REQUIRED: 'Name is required',
+  EMAIL_REQUIRED: 'Email is required',
+  EMAIL_INVALID: 'Enter a valid email',
+  PASSWORD_REQUIRED: 'Password is required',
+  PASSWORD_TOO_SHORT: 'Password must contain at least 6 characters',
+  TITLE_REQUIRED: 'Recipe title is required',
+  INSTRUCTIONS_REQUIRED: 'Instructions are required',
+  CATEGORY_REQUIRED: 'Category is required',
+  AREA_REQUIRED: 'Area is required',
+  TIME_INVALID: 'Cooking time must be a positive number',
   
   // File upload errors
-  FILE_REQUIRED: 'Файл не надано',
-  FILE_TYPE_INVALID: 'Тільки зображення дозволені!',
-  FILE_TOO_LARGE: 'Файл занадто великий',
+  FILE_REQUIRED: 'File not provided',
+  FILE_TYPE_INVALID: 'Only images are allowed!',
+  FILE_TOO_LARGE: 'File too large',
   
   // Server errors
-  SERVER_ERROR: 'Помилка сервера',
-  DATABASE_ERROR: 'Помилка бази даних',
-  UPLOAD_ERROR: 'Помилка завантаження файлу'
+  SERVER_ERROR: 'Server error',
+  DATABASE_ERROR: 'Database error',
+  UPLOAD_ERROR: 'File upload error'
 };
 
 const SUCCESS_MESSAGES = {
   // Auth success
-  USER_REGISTERED: 'Користувач успішно зареєстрований',
-  LOGIN_SUCCESS: 'Успішний вхід',
-  LOGOUT_SUCCESS: 'Успішний вихід',
+  USER_REGISTERED: 'User successfully registered',
+  LOGIN_SUCCESS: 'Login successful',
+  LOGOUT_SUCCESS: 'Logout successful',
   
   // User success
-  AVATAR_UPDATED: 'Аватарка успішно оновлена',
-  FOLLOW_SUCCESS: 'Успішно підписались на користувача',
-  UNFOLLOW_SUCCESS: 'Успішно відписались від користувача',
+  AVATAR_UPDATED: 'Avatar successfully updated',
+  FOLLOW_SUCCESS: 'Successfully followed user',
+  UNFOLLOW_SUCCESS: 'Successfully unfollowed user',
   
   // Recipe success
-  RECIPE_CREATED: 'Рецепт успішно створений',
-  RECIPE_DELETED: 'Рецепт успішно видалений',
-  RECIPE_FAVORITED: 'Рецепт додано до улюблених',
-  RECIPE_UNFAVORITED: 'Рецепт видалено з улюблених'
+  RECIPE_CREATED: 'Recipe successfully created',
+  RECIPE_DELETED: 'Recipe successfully deleted',
+  RECIPE_FAVORITED: 'Recipe added to favorites',
+  RECIPE_UNFAVORITED: 'Recipe removed from favorites'
 };
 
 const VALIDATION_RULES = {

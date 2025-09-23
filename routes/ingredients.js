@@ -7,11 +7,11 @@ const router = express.Router();
  * @swagger
  * /api/ingredients:
  *   get:
- *     summary: Отримати список інгредієнтів
+ *     summary: Get ingredients list
  *     tags: [Ingredients]
  *     responses:
  *       200:
- *         description: Список інгредієнтів
+ *         description: Ingredients list
  *         content:
  *           application/json:
  *             schema:

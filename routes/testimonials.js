@@ -7,11 +7,11 @@ const router = express.Router();
  * @swagger
  * /api/testimonials:
  *   get:
- *     summary: Отримати список відгуків
+ *     summary: Get testimonials list
  *     tags: [Testimonials]
  *     responses:
  *       200:
- *         description: Список відгуків
+ *         description: Testimonials list
  *         content:
  *           application/json:
  *             schema:

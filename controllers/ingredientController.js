@@ -17,7 +17,7 @@ const getIngredients = async (req, res) => {
     console.error('Get ingredients error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні інгредієнтів'
+      message: 'Server error while getting ingredients'
     });
   }
 };

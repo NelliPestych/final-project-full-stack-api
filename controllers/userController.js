@@ -31,7 +31,7 @@ const upload = multer({
     if (mimetype && extname) {
       return cb(null, true);
     } else {
-      cb(new Error('Тільки зображення дозволені!'));
+      cb(new Error('Only images are allowed!'));
     }
   }
 });
@@ -52,7 +52,7 @@ const getCurrentUser = async (req, res) => {
     if (userResult.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Користувач не знайдений'
+        message: 'User not found'
       });
     }
 
@@ -85,7 +85,7 @@ const getCurrentUser = async (req, res) => {
     console.error('Get current user error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні профілю'
+      message: 'Server error while getting profile'
     });
   }
 };
@@ -106,7 +106,7 @@ const getUserById = async (req, res) => {
     if (userResult.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Користувач не знайдений'
+        message: 'User not found'
       });
     }
 
@@ -130,7 +130,7 @@ const getUserById = async (req, res) => {
     console.error('Get user by ID error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні користувача'
+      message: 'Server error while getting user'
     });
   }
 };
@@ -145,7 +145,7 @@ const updateAvatar = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({
         success: false,
-        message: 'Файл аватарки не надано'
+        message: 'Avatar file not provided'
       });
     }
 
@@ -159,7 +159,7 @@ const updateAvatar = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Аватарка успішно оновлена',
+      message: 'Avatar successfully updated',
       data: {
         avatar: result.rows[0].avatar
       }
@@ -168,7 +168,7 @@ const updateAvatar = async (req, res) => {
     console.error('Update avatar error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при оновленні аватарки'
+      message: 'Server error while updating avatar'
     });
   }
 };
@@ -196,7 +196,7 @@ const getFollowers = async (req, res) => {
     console.error('Get followers error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні підписників'
+      message: 'Server error while getting followers'
     });
   }
 };
@@ -224,7 +224,7 @@ const getFollowing = async (req, res) => {
     console.error('Get following error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні підписок'
+      message: 'Server error while getting following'
     });
   }
 };
@@ -240,7 +240,7 @@ const followUser = async (req, res) => {
     if (followerId === parseInt(id)) {
       return res.status(400).json({
         success: false,
-        message: 'Не можна підписатися на самого себе'
+        message: 'Cannot follow yourself'
       });
     }
 
@@ -249,7 +249,7 @@ const followUser = async (req, res) => {
     if (userResult.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Користувач не знайдений'
+        message: 'User not found'
       });
     }
 
@@ -262,7 +262,7 @@ const followUser = async (req, res) => {
     if (existingFollow.rows.length > 0) {
       return res.status(400).json({
         success: false,
-        message: 'Ви вже підписані на цього користувача'
+        message: 'You are already following this user'
       });
     }
 
@@ -274,13 +274,13 @@ const followUser = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Успішно підписались на користувача'
+      message: 'Successfully followed user'
     });
   } catch (error) {
     console.error('Follow user error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при підписці'
+      message: 'Server error while following'
     });
   }
 };
@@ -301,19 +301,19 @@ const unfollowUser = async (req, res) => {
     if (result.rowCount === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Ви не підписані на цього користувача'
+        message: 'You are not following this user'
       });
     }
 
     res.json({
       success: true,
-      message: 'Успішно відписались від користувача'
+      message: 'Successfully unfollowed user'
     });
   } catch (error) {
     console.error('Unfollow user error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при відписці'
+      message: 'Server error while unfollowing'
     });
   }
 };
@@ -347,7 +347,7 @@ const updateProfile = async (req, res) => {
       if (existingUser.rows.length > 0) {
         return res.status(400).json({
           success: false,
-          message: 'Цей email вже використовується'
+          message: 'This email is already in use'
         });
       }
 
@@ -359,7 +359,7 @@ const updateProfile = async (req, res) => {
     if (updates.length === 0) {
       return res.status(400).json({
         success: false,
-        message: 'Немає даних для оновлення'
+        message: 'No data to update'
       });
     }
 
@@ -371,20 +371,20 @@ const updateProfile = async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Користувач не знайдений'
+        message: 'User not found'
       });
     }
 
     res.json({
       success: true,
-      message: 'Профіль успішно оновлено',
+      message: 'Profile successfully updated',
       user: result.rows[0]
     });
   } catch (error) {
     console.error('Update profile error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при оновленні профілю'
+      message: 'Server error while updating profile'
     });
   }
 };

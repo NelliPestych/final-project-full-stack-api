@@ -1,97 +1,97 @@
 # Foodies Backend API
 
-Backend API для кулінарного додатку Foodies, створений на Node.js з використанням PostgreSQL.
+Backend API for the Foodies culinary application, built on Node.js using PostgreSQL.
 
-## 🚀 Технології
+## 🚀 Technologies
 
-- **Node.js** - серверна платформа
-- **Express.js** - веб-фреймворк
-- **PostgreSQL** - база даних
-- **JWT** - авторизація
-- **bcryptjs** - хешування паролів
-- **Swagger** - документація API
-- **Multer** - завантаження файлів
-- **Docker** - контейнеризація
-- **ES Modules** - сучасний JavaScript
+- **Node.js** - server platform
+- **Express.js** - web framework
+- **PostgreSQL** - database
+- **JWT** - authorization
+- **bcryptjs** - password hashing
+- **Swagger** - API documentation
+- **Multer** - file uploads
+- **Docker** - containerization
+- **ES Modules** - modern JavaScript
 
-## 🐳 Docker (Рекомендовано)
+## 🐳 Docker (Recommended)
 
-Найшвидший спосіб запуску:
+Fastest way to get started:
 
 ```bash
-# Запуск з Docker
+# Run with Docker
 npm run docker:dev
 ```
 
-**Готово!** API доступне на http://localhost:3000
+**Done!** API is available at http://localhost:3000
 
-### Docker команди:
+### Docker commands:
 ```bash
-npm run docker:dev    # Розробка
-npm run docker:prod  # Продакшн  
-npm run docker:down  # Зупинка
-npm run docker:clean # Очищення
+npm run docker:dev    # Development
+npm run docker:prod  # Production  
+npm run docker:down  # Stop
+npm run docker:clean # Clean up
 ```
 
-## 📋 Функціональність
+## 📋 Features
 
-### Авторизація (`/api/auth`)
-- ✅ Реєстрація користувача
-- ✅ Вхід користувача
-- ✅ Вихід користувача
-- ✅ Middleware авторизації
+### Authentication (`/api/auth`)
+- ✅ User registration
+- ✅ User login
+- ✅ User logout
+- ✅ Authorization middleware
 
-### Користувачі (`/api/users`)
-- ✅ Отримання профілю поточного користувача
-- ✅ Отримання профілю іншого користувача
-- ✅ Оновлення аватарки
-- ✅ Отримання списку підписників
-- ✅ Отримання списку підписок
-- ✅ Підписка на користувача
-- ✅ Відписка від користувача
+### Users (`/api/users`)
+- ✅ Get current user profile
+- ✅ Get other user profile
+- ✅ Update avatar
+- ✅ Get followers list
+- ✅ Get following list
+- ✅ Follow user
+- ✅ Unfollow user
 
-### Публічні ендпоінти
-- ✅ Категорії рецептів (`/api/categories`)
-- ✅ Регіони походження (`/api/areas`)
-- ✅ Інгредієнти (`/api/ingredients`)
-- ✅ Відгуки (`/api/testimonials`)
+### Public endpoints
+- ✅ Recipe categories (`/api/categories`)
+- ✅ Origin regions (`/api/areas`)
+- ✅ Ingredients (`/api/ingredients`)
+- ✅ Testimonials (`/api/testimonials`)
 
-### Рецепти (`/api/recipes`)
-- ✅ Пошук рецептів з фільтрами
-- ✅ Отримання деталей рецепту
-- ✅ Популярні рецепти
-- ✅ Створення рецепту
-- ✅ Отримання власних рецептів
-- ✅ Видалення рецепту
-- ✅ Додавання до улюблених
-- ✅ Видалення з улюблених
-- ✅ Отримання улюблених рецептів
+### Recipes (`/api/recipes`)
+- ✅ Search recipes with filters
+- ✅ Get recipe details
+- ✅ Popular recipes
+- ✅ Create recipe
+- ✅ Get own recipes
+- ✅ Delete recipe
+- ✅ Add to favorites
+- ✅ Remove from favorites
+- ✅ Get favorite recipes
 
-## 🛠 Встановлення та запуск
+## 🛠 Installation and Setup
 
-### Передумови
-- Node.js (версія 14 або вище)
-- PostgreSQL (версія 12 або вище)
+### Prerequisites
+- Node.js (version 14 or higher)
+- PostgreSQL (version 12 or higher)
 
-### 1. Клонування репозиторію
+### 1. Clone repository
 ```bash
 git clone <repository-url>
 cd final-project-full-stack-api
 ```
 
-### 2. Встановлення залежностей
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 3. Налаштування змінних середовища
-Скопіюйте файл `env.example` в `.env` та налаштуйте змінні:
+### 3. Environment variables setup
+Copy `env.example` file to `.env` and configure variables:
 
 ```bash
 cp env.example .env
 ```
 
-Відредагуйте `.env` файл:
+Edit `.env` file:
 ```env
 # Database Configuration
 DB_HOST=localhost
@@ -113,70 +113,70 @@ UPLOAD_PATH=./uploads
 MAX_FILE_SIZE=5242880
 ```
 
-### 4. Створення бази даних
+### 4. Create database
 ```bash
-# Створити базу даних PostgreSQL
+# Create PostgreSQL database
 createdb foodies_db
 ```
 
-### 5. Міграція бази даних
+### 5. Database migration
 ```bash
-# Створити таблиці
+# Create tables
 npm run migrate
 
-# Заповнити початковими даними
+# Seed with initial data
 npm run seed
 ```
 
-### 6. Запуск сервера
+### 6. Start server
 ```bash
-# Режим розробки
+# Development mode
 npm run dev
 
-# Режим продакшн
+# Production mode
 npm start
 ```
 
-## 📚 API Документація
+## 📚 API Documentation
 
-Після запуску сервера, Swagger документація буде доступна за адресою:
+After starting the server, Swagger documentation will be available at:
 - **Development**: http://localhost:3000/api-docs
 - **Production**: https://your-api-domain.com/api-docs
 
-## 🔧 Доступні скрипти
+## 🔧 Available Scripts
 
-- `npm start` - запуск сервера в продакшн режимі
-- `npm run dev` - запуск сервера в режимі розробки з nodemon
-- `npm run migrate` - створення таблиць бази даних
-- `npm run seed` - заповнення бази даних початковими даними
+- `npm start` - start server in production mode
+- `npm run dev` - start server in development mode with nodemon
+- `npm run migrate` - create database tables
+- `npm run seed` - populate database with initial data
 
-## 🗄 Структура бази даних
+## 🗄 Database Structure
 
-### Основні таблиці:
-- `users` - користувачі
-- `recipes` - рецепти
-- `categories` - категорії рецептів
-- `areas` - регіони походження
-- `ingredients` - інгредієнти
-- `testimonials` - відгуки
-- `recipe_ingredients` - зв'язок рецептів з інгредієнтами
-- `user_follows` - підписки користувачів
-- `user_favorite_recipes` - улюблені рецепти
+### Main tables:
+- `users` - users
+- `recipes` - recipes
+- `categories` - recipe categories
+- `areas` - origin regions
+- `ingredients` - ingredients
+- `testimonials` - testimonials
+- `recipe_ingredients` - recipe-ingredient relationships
+- `user_follows` - user subscriptions
+- `user_favorite_recipes` - favorite recipes
 
-## 🔐 Авторизація
+## 🔐 Authorization
 
-API використовує JWT токени для авторизації. Для доступу до приватних ендпоінтів додайте заголовок:
+API uses JWT tokens for authorization. To access private endpoints, add the header:
 
 ```
 Authorization: Bearer <your-jwt-token>
 ```
 
-## 📁 Структура проекту
+## 📁 Project Structure
 
 ```
 ├── config/
-│   ├── database.js      # Конфігурація БД
-│   └── swagger.js       # Конфігурація Swagger
+│   ├── database.js      # Database configuration
+│   └── swagger.js       # Swagger configuration
 ├── controllers/
 │   ├── authController.js
 │   ├── userController.js
@@ -186,9 +186,9 @@ Authorization: Bearer <your-jwt-token>
 │   ├── ingredientController.js
 │   └── testimonialController.js
 ├── middleware/
-│   ├── auth.js          # Middleware авторизації
-│   ├── errorHandler.js  # Обробка помилок
-│   └── validation.js    # Валідація даних
+│   ├── auth.js          # Authorization middleware
+│   ├── errorHandler.js  # Error handling
+│   └── validation.js    # Data validation
 ├── routes/
 │   ├── auth.js
 │   ├── users.js
@@ -198,102 +198,102 @@ Authorization: Bearer <your-jwt-token>
 │   ├── ingredients.js
 │   └── testimonials.js
 ├── scripts/
-│   ├── migrate.js       # Міграція БД
-│   └── seed.js          # Заповнення БД
-├── uploads/             # Завантажені файли
-├── foodies/             # JSON дані для імпорту
-├── server.js            # Головний файл сервера
+│   ├── migrate.js       # Database migration
+│   └── seed.js          # Database seeding
+├── uploads/             # Uploaded files
+├── foodies/             # JSON data for import
+├── server.js            # Main server file
 └── package.json
 ```
 
-## 🌐 Ендпоінти
+## 🌐 Endpoints
 
-### Авторизація
-- `POST /api/auth/register` - Реєстрація
-- `POST /api/auth/login` - Вхід
-- `POST /api/auth/logout` - Вихід
+### Authentication
+- `POST /api/auth/register` - Register
+- `POST /api/auth/login` - Login
+- `POST /api/auth/logout` - Logout
 
-### Користувачі
-- `GET /api/users/profile` - Мій профіль
-- `GET /api/users/:id` - Профіль користувача
-- `PUT /api/users/avatar` - Оновлення аватарки
-- `GET /api/users/followers` - Мої підписники
-- `GET /api/users/following` - Мої підписки
-- `POST /api/users/follow/:id` - Підписатися
-- `DELETE /api/users/follow/:id` - Відписатися
+### Users
+- `GET /api/users/profile` - My profile
+- `GET /api/users/:id` - User profile
+- `PUT /api/users/avatar` - Update avatar
+- `GET /api/users/followers` - My followers
+- `GET /api/users/following` - My following
+- `POST /api/users/follow/:id` - Follow user
+- `DELETE /api/users/follow/:id` - Unfollow user
 
-### Рецепти
-- `GET /api/recipes/search` - Пошук рецептів
-- `GET /api/recipes/popular` - Популярні рецепти
-- `GET /api/recipes/:id` - Деталі рецепту
-- `POST /api/recipes` - Створити рецепт
-- `GET /api/recipes/my` - Мої рецепти
-- `DELETE /api/recipes/:id` - Видалити рецепт
-- `POST /api/recipes/:id/favorite` - Додати до улюблених
-- `DELETE /api/recipes/:id/favorite` - Видалити з улюблених
-- `GET /api/recipes/favorites` - Улюблені рецепти
+### Recipes
+- `GET /api/recipes/search` - Search recipes
+- `GET /api/recipes/popular` - Popular recipes
+- `GET /api/recipes/:id` - Recipe details
+- `POST /api/recipes` - Create recipe
+- `GET /api/recipes/my` - My recipes
+- `DELETE /api/recipes/:id` - Delete recipe
+- `POST /api/recipes/:id/favorite` - Add to favorites
+- `DELETE /api/recipes/:id/favorite` - Remove from favorites
+- `GET /api/recipes/favorites` - Favorite recipes
 
-### Публічні
-- `GET /api/categories` - Категорії
-- `GET /api/areas` - Регіони
-- `GET /api/ingredients` - Інгредієнти
-- `GET /api/testimonials` - Відгуки
+### Public
+- `GET /api/categories` - Categories
+- `GET /api/areas` - Regions
+- `GET /api/ingredients` - Ingredients
+- `GET /api/testimonials` - Testimonials
 
-## 🚦 Статус коди
+## 🚦 Status Codes
 
-- `200` - Успішний запит
-- `201` - Ресурс створений
-- `400` - Помилка валідації
-- `401` - Не авторизований
-- `403` - Доступ заборонений
-- `404` - Ресурс не знайдений
-- `500` - Помилка сервера
+- `200` - Success
+- `201` - Resource created
+- `400` - Validation error
+- `401` - Unauthorized
+- `403` - Access forbidden
+- `404` - Resource not found
+- `500` - Server error
 
-## 📝 Приклади використання
+## 📝 Usage Examples
 
-### Реєстрація користувача
+### User registration
 ```bash
 curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Іван Іванов",
-    "email": "ivan@example.com",
+    "name": "John Doe",
+    "email": "john@example.com",
     "password": "password123"
   }'
 ```
 
-### Пошук рецептів
+### Search recipes
 ```bash
 curl "http://localhost:3000/api/recipes/search?category=Soup&page=1&limit=10"
 ```
 
-### Створення рецепту (з авторизацією)
+### Create recipe (with authorization)
 ```bash
 curl -X POST http://localhost:3000/api/recipes \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <your-token>" \
   -d '{
-    "title": "Борщ український",
-    "description": "Традиційний український борщ",
-    "instructions": "1. Зварити м'ясо...",
+    "title": "Ukrainian Borscht",
+    "description": "Traditional Ukrainian borscht",
+    "instructions": "1. Cook meat...",
     "time": 120,
     "category": "Soup",
     "area": "Ukrainian",
     "ingredients": [
       {"id": 1, "measure": "500g"},
-      {"id": 2, "measure": "2 шт"}
+      {"id": 2, "measure": "2 pcs"}
     ]
   }'
 ```
 
-## 🤝 Внесок у розробку
+## 🤝 Contributing
 
-1. Форкніть репозиторій
-2. Створіть гілку для нової функції (`git checkout -b feature/amazing-feature`)
-3. Зробіть коміт змін (`git commit -m 'Add amazing feature'`)
-4. Відправте зміни (`git push origin feature/amazing-feature`)
-5. Відкрийте Pull Request
+1. Fork the repository
+2. Create a branch for new feature (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 Ліцензія
+## 📄 License
 
-Цей проект ліцензований під MIT License.
+This project is licensed under the MIT License.
