@@ -1,7 +1,7 @@
-const pool = require('../config/database');
-const bcrypt = require('bcryptjs');
-const fs = require('fs');
-const path = require('path');
+import pool from '../config/database.js';
+import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import path from 'path';
 
 const seedDatabase = async () => {
   try {
@@ -66,7 +66,19 @@ const seedDatabase = async () => {
       
       const categoryId = categoryResult.rows[0]?.id;
       const areaId = areaResult.rows[0]?.id;
-      const ownerId = 1; // Use first user as owner
+      
+      // Find correct owner by matching JSON user with recipe owner
+      let ownerId = 1;
+      if (recipe.owner && recipe.owner.$oid) {
+        const recipeOwnerOid = recipe.owner.$oid;
+        const userFromJson = usersData.find(u => u._id.$oid === recipeOwnerOid);
+        if (userFromJson) {
+          const dbUserResult = await pool.query('SELECT id FROM users WHERE name = $1', [userFromJson.name]);
+          if (dbUserResult.rows.length > 0) {
+            ownerId = dbUserResult.rows[0].id;
+          }
+        }
+      }
 
       // Insert recipe
       const recipeId = recipesData.indexOf(recipe) + 1;
@@ -108,7 +120,20 @@ const seedDatabase = async () => {
     console.log('📝 Seeding testimonials...');
     for (const testimonial of testimonialsData) {
       const testimonialId = testimonialsData.indexOf(testimonial) + 1;
-      const ownerId = 1; // Use first user as owner
+      
+      // Find correct owner by matching JSON user with testimonial owner
+      let ownerId = 1;
+      if (testimonial.owner && testimonial.owner.$oid) {
+        const testimonialOwnerOid = testimonial.owner.$oid;
+        const userFromJson = usersData.find(u => u._id.$oid === testimonialOwnerOid);
+        if (userFromJson) {
+          const dbUserResult = await pool.query('SELECT id FROM users WHERE name = $1', [userFromJson.name]);
+          if (dbUserResult.rows.length > 0) {
+            ownerId = dbUserResult.rows[0].id;
+          }
+        }
+      }
+      
       await pool.query(
         'INSERT INTO testimonials (id, testimonial, owner_id) VALUES ($1, $2, $3) ON CONFLICT (id) DO NOTHING',
         [testimonialId, testimonial.testimonial, ownerId]
@@ -123,10 +148,10 @@ const seedDatabase = async () => {
 };
 
 // Run seeding
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   seedDatabase()
     .then(() => process.exit(0))
     .catch(() => process.exit(1));
 }
 
-module.exports = { seedDatabase };
+export { seedDatabase };

@@ -58,4 +58,4 @@ const notFound = (req, res, next) => {
   next(error);
 };
 
-module.exports = { errorHandler, notFound };
+export { errorHandler, notFound };

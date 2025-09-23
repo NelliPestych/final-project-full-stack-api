@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+import pool from '../config/database.js';
 
 // @desc    Get all testimonials
 // @route   GET /api/testimonials
@@ -26,6 +26,6 @@ const getTestimonials = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getTestimonials
 };

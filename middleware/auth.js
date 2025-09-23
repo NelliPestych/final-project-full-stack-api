@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const pool = require('../config/database');
+import jwt from 'jsonwebtoken';
+import pool from '../config/database.js';
 
 const auth = async (req, res, next) => {
   try {
@@ -38,4 +38,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth;
+export default auth;

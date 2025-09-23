@@ -1,6 +1,6 @@
-const express = require('express');
-const { body } = require('express-validator');
-const { 
+import express from 'express';
+import { body } from 'express-validator';
+import { 
   searchRecipes, 
   getRecipeById, 
   getPopularRecipes, 
@@ -9,10 +9,11 @@ const {
   deleteRecipe, 
   addToFavorites, 
   removeFromFavorites, 
-  getFavoriteRecipes 
-} = require('../controllers/recipeController');
-const { validate } = require('../middleware/validation');
-const auth = require('../middleware/auth');
+  getFavoriteRecipes,
+  checkRecipeExists
+} from '../controllers/recipeController.js';
+import { validate } from '../middleware/validation.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -117,6 +118,27 @@ router.get('/search', searchRecipes);
  *                     $ref: '#/components/schemas/Recipe'
  */
 router.get('/popular', getPopularRecipes);
+
+/**
+ * @swagger
+ * /api/recipes/{id}:
+ *   head:
+ *     summary: Перевірити існування рецепту
+ *     tags: [Recipes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID рецепту
+ *     responses:
+ *       200:
+ *         description: Рецепт існує
+ *       404:
+ *         description: Рецепт не знайдений
+ */
+router.head('/:id', checkRecipeExists);
 
 /**
  * @swagger
@@ -491,4 +513,4 @@ router.post('/:id/favorite', auth, addToFavorites);
  */
 router.delete('/:id/favorite', auth, removeFromFavorites);
 
-module.exports = router;
+export default router;

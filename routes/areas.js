@@ -1,5 +1,5 @@
-const express = require('express');
-const { getAreas } = require('../controllers/areaController');
+import express from 'express';
+import { getAreas } from '../controllers/areaController.js';
 
 const router = express.Router();
 
@@ -27,4 +27,4 @@ const router = express.Router();
  */
 router.get('/', getAreas);
 
-module.exports = router;
+export default router;

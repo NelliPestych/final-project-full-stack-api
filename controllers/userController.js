@@ -1,7 +1,7 @@
-const pool = require('../config/database');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+import pool from '../config/database.js';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -318,10 +318,82 @@ const unfollowUser = async (req, res) => {
   }
 };
 
-module.exports = {
+// @desc    Update user profile (partial update)
+// @route   PATCH /api/users/profile
+// @access  Private
+const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { name, email } = req.body;
+
+    // Build dynamic update query
+    const updates = [];
+    const values = [];
+    let paramCount = 1;
+
+    if (name !== undefined) {
+      updates.push(`name = $${paramCount}`);
+      values.push(name);
+      paramCount++;
+    }
+
+    if (email !== undefined) {
+      // Check if email is already taken by another user
+      const existingUser = await pool.query(
+        'SELECT id FROM users WHERE email = $1 AND id != $2',
+        [email, userId]
+      );
+
+      if (existingUser.rows.length > 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'Цей email вже використовується'
+        });
+      }
+
+      updates.push(`email = $${paramCount}`);
+      values.push(email);
+      paramCount++;
+    }
+
+    if (updates.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Немає даних для оновлення'
+      });
+    }
+
+    values.push(userId);
+    const query = `UPDATE users SET ${updates.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${paramCount} RETURNING id, name, email, avatar, created_at, updated_at`;
+
+    const result = await pool.query(query, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Користувач не знайдений'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Профіль успішно оновлено',
+      user: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Помилка сервера при оновленні профілю'
+    });
+  }
+};
+
+export {
   getCurrentUser,
   getUserById,
   updateAvatar,
+  updateProfile,
   getFollowers,
   getFollowing,
   followUser,

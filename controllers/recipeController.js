@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+import pool from '../config/database.js';
 
 // @desc    Search recipes
 // @route   GET /api/recipes/search
@@ -497,7 +497,31 @@ const getFavoriteRecipes = async (req, res) => {
   }
 };
 
-module.exports = {
+// @desc    Check if recipe exists
+// @route   HEAD /api/recipes/:id
+// @access  Public
+const checkRecipeExists = async (req, res) => {
+  try {
+    const recipeId = parseInt(req.params.id);
+
+    if (isNaN(recipeId)) {
+      return res.status(400).end();
+    }
+
+    const result = await pool.query('SELECT id FROM recipes WHERE id = $1', [recipeId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).end();
+    }
+
+    res.status(200).end();
+  } catch (error) {
+    console.error('Check recipe exists error:', error);
+    res.status(500).end();
+  }
+};
+
+export {
   searchRecipes,
   getRecipeById,
   getPopularRecipes,
@@ -506,5 +530,6 @@ module.exports = {
   deleteRecipe,
   addToFavorites,
   removeFromFavorites,
-  getFavoriteRecipes
+  getFavoriteRecipes,
+  checkRecipeExists
 };
