@@ -6,7 +6,7 @@ const options = {
     info: {
       title: 'Foodies API',
       version: '1.0.0',
-      description: 'API для кулінарного додатку Foodies',
+      description: 'API for Foodies culinary application',
       contact: {
         name: 'Foodies Team',
         email: 'support@foodies.com'

@@ -7,11 +7,11 @@ const router = express.Router();
  * @swagger
  * /api/areas:
  *   get:
- *     summary: Отримати список регіонів походження страв
+ *     summary: Get cuisine origin regions list
  *     tags: [Areas]
  *     responses:
  *       200:
- *         description: Список регіонів
+ *         description: Areas list
  *         content:
  *           application/json:
  *             schema:

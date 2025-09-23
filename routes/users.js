@@ -8,13 +8,13 @@ const router = express.Router();
  * @swagger
  * /api/users/profile:
  *   get:
- *     summary: Отримати профіль поточного користувача
+ *     summary: Get current user profile
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Профіль користувача
+ *         description: User profile
  *         content:
  *           application/json:
  *             schema:
@@ -47,7 +47,7 @@ router.get('/profile', auth, getCurrentUser);
  * @swagger
  * /api/users/{id}:
  *   get:
- *     summary: Отримати профіль користувача за ID
+ *     summary: Get user profile by ID
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -57,10 +57,10 @@ router.get('/profile', auth, getCurrentUser);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID користувача
+ *         description: User ID
  *     responses:
  *       200:
- *         description: Профіль користувача
+ *         description: User profile
  *         content:
  *           application/json:
  *             schema:
@@ -87,7 +87,7 @@ router.get('/:id', auth, getUserById);
  * @swagger
  * /api/users/avatar:
  *   put:
- *     summary: Оновити аватарку користувача
+ *     summary: Update user avatar
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -101,10 +101,10 @@ router.get('/:id', auth, getUserById);
  *               avatar:
  *                 type: string
  *                 format: binary
- *                 description: Файл зображення аватарки
+ *                 description: Avatar image file
  *     responses:
  *       200:
- *         description: Аватарка успішно оновлена
+ *         description: Avatar successfully updated
  *         content:
  *           application/json:
  *             schema:
@@ -115,7 +115,7 @@ router.get('/:id', auth, getUserById);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Аватарка успішно оновлена"
+ *                   example: "Avatar successfully updated"
  *                 data:
  *                   type: object
  *                   properties:
@@ -129,7 +129,7 @@ router.put('/avatar', auth, upload.single('avatar'), updateAvatar);
  * @swagger
  * /api/users/profile:
  *   patch:
- *     summary: Частково оновити профіль користувача
+ *     summary: Partially update user profile
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -142,14 +142,14 @@ router.put('/avatar', auth, upload.single('avatar'), updateAvatar);
  *             properties:
  *               name:
  *                 type: string
- *                 example: "Нове ім'я"
+ *                 example: "New name"
  *               email:
  *                 type: string
  *                 format: email
  *                 example: "new@example.com"
  *     responses:
  *       200:
- *         description: Профіль успішно оновлено
+ *         description: Profile successfully updated
  *         content:
  *           application/json:
  *             schema:
@@ -160,17 +160,17 @@ router.put('/avatar', auth, upload.single('avatar'), updateAvatar);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Профіль успішно оновлено"
+ *                   example: "Profile successfully updated"
  *                 user:
  *                   $ref: '#/components/schemas/User'
  *       400:
- *         description: Помилка валідації
+ *         description: Validation error
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Error'
  *       401:
- *         description: Неавторизований доступ
+ *         description: Unauthorized access
  *         content:
  *           application/json:
  *             schema:
@@ -182,13 +182,13 @@ router.patch('/profile', auth, updateProfile);
  * @swagger
  * /api/users/followers:
  *   get:
- *     summary: Отримати список підписників
+ *     summary: Get followers list
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Список підписників
+ *         description: Followers list
  *         content:
  *           application/json:
  *             schema:
@@ -214,13 +214,13 @@ router.get('/followers', auth, getFollowers);
  * @swagger
  * /api/users/following:
  *   get:
- *     summary: Отримати список підписок
+ *     summary: Get following list
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Список підписок
+ *         description: Following list
  *         content:
  *           application/json:
  *             schema:
@@ -246,7 +246,7 @@ router.get('/following', auth, getFollowing);
  * @swagger
  * /api/users/{id}/follow:
  *   post:
- *     summary: Підписатися на користувача
+ *     summary: Follow user
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -256,10 +256,10 @@ router.get('/following', auth, getFollowing);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID користувача для підписки
+ *         description: User ID to follow
  *     responses:
  *       200:
- *         description: Успішно підписались
+ *         description: Successfully followed
  *         content:
  *           application/json:
  *             schema:
@@ -270,9 +270,9 @@ router.get('/following', auth, getFollowing);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Успішно підписались на користувача"
+ *                   example: "Successfully followed user"
  *       400:
- *         description: Помилка підписки
+ *         description: Follow error
  *         content:
  *           application/json:
  *             schema:
@@ -284,7 +284,7 @@ router.post('/:id/follow', auth, followUser);
  * @swagger
  * /api/users/{id}/follow:
  *   delete:
- *     summary: Відписатися від користувача
+ *     summary: Unfollow user
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -294,10 +294,10 @@ router.post('/:id/follow', auth, followUser);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID користувача для відписки
+ *         description: User ID to unfollow
  *     responses:
  *       200:
- *         description: Успішно відписались
+ *         description: Successfully unfollowed
  *         content:
  *           application/json:
  *             schema:
@@ -308,9 +308,9 @@ router.post('/:id/follow', auth, followUser);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Успішно відписались від користувача"
+ *                   example: "Successfully unfollowed user"
  *       404:
- *         description: Підписка не знайдена
+ *         description: Follow not found
  *         content:
  *           application/json:
  *             schema:

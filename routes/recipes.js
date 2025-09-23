@@ -21,44 +21,44 @@ const router = express.Router();
  * @swagger
  * /api/recipes/search:
  *   get:
- *     summary: Пошук рецептів
+ *     summary: Search recipes
  *     tags: [Recipes]
  *     parameters:
  *       - in: query
  *         name: category
  *         schema:
  *           type: string
- *         description: Назва категорії
+ *         description: Category name
  *       - in: query
  *         name: ingredient
  *         schema:
  *           type: string
- *         description: Назва інгредієнта
+ *         description: Ingredient name
  *       - in: query
  *         name: area
  *         schema:
  *           type: string
- *         description: Назва регіону
+ *         description: Area name
  *       - in: query
  *         name: title
  *         schema:
  *           type: string
- *         description: Назва рецепту
+ *         description: Recipe name
  *       - in: query
  *         name: page
  *         schema:
  *           type: integer
  *           default: 1
- *         description: Номер сторінки
+ *         description: Page number
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           default: 12
- *         description: Кількість рецептів на сторінці
+ *         description: Number of recipes per page
  *     responses:
  *       200:
- *         description: Результати пошуку
+ *         description: Search results
  *         content:
  *           application/json:
  *             schema:
@@ -92,7 +92,7 @@ router.get('/search', searchRecipes);
  * @swagger
  * /api/recipes/popular:
  *   get:
- *     summary: Отримати популярні рецепти
+ *     summary: Get popular recipes
  *     tags: [Recipes]
  *     parameters:
  *       - in: query
@@ -100,10 +100,10 @@ router.get('/search', searchRecipes);
  *         schema:
  *           type: integer
  *           default: 10
- *         description: Кількість рецептів
+ *         description: Number of recipes
  *     responses:
  *       200:
- *         description: Список популярних рецептів
+ *         description: Popular recipes list
  *         content:
  *           application/json:
  *             schema:
@@ -123,7 +123,7 @@ router.get('/popular', getPopularRecipes);
  * @swagger
  * /api/recipes/{id}:
  *   head:
- *     summary: Перевірити існування рецепту
+ *     summary: Check recipe existence
  *     tags: [Recipes]
  *     parameters:
  *       - in: path
@@ -131,12 +131,12 @@ router.get('/popular', getPopularRecipes);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID рецепту
+ *         description: Recipe ID
  *     responses:
  *       200:
- *         description: Рецепт існує
+ *         description: Recipe exists
  *       404:
- *         description: Рецепт не знайдений
+ *         description: Recipe not found
  */
 router.head('/:id', checkRecipeExists);
 
@@ -144,7 +144,7 @@ router.head('/:id', checkRecipeExists);
  * @swagger
  * /api/recipes/favorites:
  *   get:
- *     summary: Отримати улюблені рецепти
+ *     summary: Get favorite recipes
  *     tags: [Recipes]
  *     security:
  *       - bearerAuth: []
@@ -154,16 +154,16 @@ router.head('/:id', checkRecipeExists);
  *         schema:
  *           type: integer
  *           default: 1
- *         description: Номер сторінки
+ *         description: Page number
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           default: 12
- *         description: Кількість рецептів на сторінці
+ *         description: Number of recipes per page
  *     responses:
  *       200:
- *         description: Список улюблених рецептів
+ *         description: Favorite recipes list
  *         content:
  *           application/json:
  *             schema:
@@ -197,7 +197,7 @@ router.get('/favorites', auth, getFavoriteRecipes);
  * @swagger
  * /api/recipes/my:
  *   get:
- *     summary: Отримати мої рецепти
+ *     summary: Get my recipes
  *     tags: [Recipes]
  *     security:
  *       - bearerAuth: []
@@ -207,16 +207,16 @@ router.get('/favorites', auth, getFavoriteRecipes);
  *         schema:
  *           type: integer
  *           default: 1
- *         description: Номер сторінки
+ *         description: Page number
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           default: 12
- *         description: Кількість рецептів на сторінці
+ *         description: Number of recipes per page
  *     responses:
  *       200:
- *         description: Список моїх рецептів
+ *         description: My recipes list
  *         content:
  *           application/json:
  *             schema:
@@ -250,7 +250,7 @@ router.get('/my', auth, getMyRecipes);
  * @swagger
  * /api/recipes/{id}:
  *   get:
- *     summary: Отримати рецепт за ID
+ *     summary: Get recipe by ID
  *     tags: [Recipes]
  *     parameters:
  *       - in: path
@@ -258,10 +258,10 @@ router.get('/my', auth, getMyRecipes);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID рецепту
+ *         description: Recipe ID
  *     responses:
  *       200:
- *         description: Детальна інформація про рецепт
+ *         description: Detailed recipe information
  *         content:
  *           application/json:
  *             schema:
@@ -289,7 +289,7 @@ router.get('/my', auth, getMyRecipes);
  *                         favoritesCount:
  *                           type: integer
  *       404:
- *         description: Рецепт не знайдений
+ *         description: Recipe not found
  *         content:
  *           application/json:
  *             schema:
@@ -301,7 +301,7 @@ router.get('/:id', getRecipeById);
  * @swagger
  * /api/recipes:
  *   post:
- *     summary: Створити новий рецепт
+ *     summary: Create new recipe
  *     tags: [Recipes]
  *     security:
  *       - bearerAuth: []
@@ -319,13 +319,13 @@ router.get('/:id', getRecipeById);
  *             properties:
  *               title:
  *                 type: string
- *                 example: "Борщ український"
+ *                 example: "Ukrainian Borscht"
  *               description:
  *                 type: string
- *                 example: "Традиційний український борщ"
+ *                 example: "Traditional Ukrainian borscht"
  *               instructions:
  *                 type: string
- *                 example: "1. Зварити м'ясо..."
+ *                 example: "1. Cook meat..."
  *               thumb:
  *                 type: string
  *                 format: uri
@@ -352,7 +352,7 @@ router.get('/:id', getRecipeById);
  *                       example: "500g"
  *     responses:
  *       201:
- *         description: Рецепт успішно створений
+ *         description: Recipe successfully created
  *         content:
  *           application/json:
  *             schema:
@@ -363,11 +363,11 @@ router.get('/:id', getRecipeById);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Рецепт успішно створений"
+ *                   example: "Recipe successfully created"
  *                 data:
  *                   $ref: '#/components/schemas/Recipe'
  *       400:
- *         description: Помилка валідації
+ *         description: Validation error
  *         content:
  *           application/json:
  *             schema:
@@ -377,27 +377,27 @@ router.post('/', [
   body('title')
     .trim()
     .isLength({ min: 2, max: 200 })
-    .withMessage('Назва рецепту повинна містити від 2 до 200 символів'),
+    .withMessage('Recipe title must contain 2 to 200 characters'),
   body('instructions')
     .trim()
     .isLength({ min: 10 })
-    .withMessage('Інструкції повинні містити мінімум 10 символів'),
+    .withMessage('Instructions must contain at least 10 characters'),
   body('category')
     .notEmpty()
-    .withMessage('Категорія обов\'язкова'),
+    .withMessage('Category is required'),
   body('area')
     .notEmpty()
-    .withMessage('Регіон обов\'язковий'),
+    .withMessage('Area is required'),
   body('time')
     .isInt({ min: 1 })
-    .withMessage('Час приготування повинен бути додатним числом')
+    .withMessage('Cooking time must be a positive number')
 ], validate, auth, createRecipe);
 
 /**
  * @swagger
  * /api/recipes/{id}:
  *   delete:
- *     summary: Видалити рецепт
+ *     summary: Delete recipe
  *     tags: [Recipes]
  *     security:
  *       - bearerAuth: []
@@ -407,10 +407,10 @@ router.post('/', [
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID рецепту
+ *         description: Recipe ID
  *     responses:
  *       200:
- *         description: Рецепт успішно видалений
+ *         description: Recipe successfully deleted
  *         content:
  *           application/json:
  *             schema:
@@ -421,9 +421,9 @@ router.post('/', [
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Рецепт успішно видалений"
+ *                   example: "Recipe successfully deleted"
  *       404:
- *         description: Рецепт не знайдений
+ *         description: Recipe not found
  *         content:
  *           application/json:
  *             schema:
@@ -435,7 +435,7 @@ router.delete('/:id', auth, deleteRecipe);
  * @swagger
  * /api/recipes/{id}/favorite:
  *   post:
- *     summary: Додати рецепт до улюблених
+ *     summary: Add recipe to favorites
  *     tags: [Recipes]
  *     security:
  *       - bearerAuth: []
@@ -445,10 +445,10 @@ router.delete('/:id', auth, deleteRecipe);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID рецепту
+ *         description: Recipe ID
  *     responses:
  *       200:
- *         description: Рецепт додано до улюблених
+ *         description: Recipe added to favorites
  *         content:
  *           application/json:
  *             schema:
@@ -459,15 +459,15 @@ router.delete('/:id', auth, deleteRecipe);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Рецепт додано до улюблених"
+ *                   example: "Recipe added to favorites"
  *       400:
- *         description: Рецепт вже в улюблених
+ *         description: Recipe already in favorites
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Error'
  *       404:
- *         description: Рецепт не знайдений
+ *         description: Recipe not found
  *         content:
  *           application/json:
  *             schema:
@@ -479,7 +479,7 @@ router.post('/:id/favorite', auth, addToFavorites);
  * @swagger
  * /api/recipes/{id}/favorite:
  *   delete:
- *     summary: Видалити рецепт з улюблених
+ *     summary: Remove recipe from favorites
  *     tags: [Recipes]
  *     security:
  *       - bearerAuth: []
@@ -489,10 +489,10 @@ router.post('/:id/favorite', auth, addToFavorites);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID рецепту
+ *         description: Recipe ID
  *     responses:
  *       200:
- *         description: Рецепт видалено з улюблених
+ *         description: Recipe removed from favorites
  *         content:
  *           application/json:
  *             schema:
@@ -503,9 +503,9 @@ router.post('/:id/favorite', auth, addToFavorites);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Рецепт видалено з улюблених"
+ *                   example: "Recipe removed from favorites"
  *       404:
- *         description: Рецепт не знайдений в улюблених
+ *         description: Recipe not found in favorites
  *         content:
  *           application/json:
  *             schema:

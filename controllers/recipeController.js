@@ -105,7 +105,7 @@ const searchRecipes = async (req, res) => {
     console.error('Search recipes error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при пошуку рецептів'
+      message: 'Server error while searching recipes'
     });
   }
 };
@@ -133,7 +133,7 @@ const getRecipeById = async (req, res) => {
     if (recipeResult.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Рецепт не знайдений'
+        message: 'Recipe not found'
       });
     }
 
@@ -166,7 +166,7 @@ const getRecipeById = async (req, res) => {
     console.error('Get recipe by ID error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні рецепту'
+      message: 'Server error while getting recipe'
     });
   }
 };
@@ -202,7 +202,7 @@ const getPopularRecipes = async (req, res) => {
     console.error('Get popular recipes error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні популярних рецептів'
+      message: 'Server error while getting popular recipes'
     });
   }
 };
@@ -237,14 +237,14 @@ const createRecipe = async (req, res) => {
     if (!categoryId) {
       return res.status(400).json({
         success: false,
-        message: 'Категорія не знайдена'
+        message: 'Category not found'
       });
     }
 
     if (!areaId) {
       return res.status(400).json({
         success: false,
-        message: 'Регіон не знайдений'
+        message: 'Area not found'
       });
     }
 
@@ -269,14 +269,14 @@ const createRecipe = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Рецепт успішно створений',
+      message: 'Recipe successfully created',
       data: recipe
     });
   } catch (error) {
     console.error('Create recipe error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при створенні рецепту'
+      message: 'Server error while creating recipe'
     });
   }
 };
@@ -326,7 +326,7 @@ const getMyRecipes = async (req, res) => {
     console.error('Get my recipes error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні ваших рецептів'
+      message: 'Server error while getting your recipes'
     });
   }
 };
@@ -347,19 +347,19 @@ const deleteRecipe = async (req, res) => {
     if (result.rowCount === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Рецепт не знайдений або ви не маєте прав на його видалення'
+        message: 'Recipe not found or you do not have permission to delete it'
       });
     }
 
     res.json({
       success: true,
-      message: 'Рецепт успішно видалений'
+      message: 'Recipe successfully deleted'
     });
   } catch (error) {
     console.error('Delete recipe error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при видаленні рецепту'
+      message: 'Server error while deleting recipe'
     });
   }
 };
@@ -377,7 +377,7 @@ const addToFavorites = async (req, res) => {
     if (recipeResult.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Рецепт не знайдений'
+        message: 'Recipe not found'
       });
     }
 
@@ -390,7 +390,7 @@ const addToFavorites = async (req, res) => {
     if (existingFavorite.rows.length > 0) {
       return res.status(400).json({
         success: false,
-        message: 'Рецепт вже в улюблених'
+        message: 'Recipe already in favorites'
       });
     }
 
@@ -402,13 +402,13 @@ const addToFavorites = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Рецепт додано до улюблених'
+      message: 'Recipe added to favorites'
     });
   } catch (error) {
     console.error('Add to favorites error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при додаванні до улюблених'
+      message: 'Server error while adding to favorites'
     });
   }
 };
@@ -429,19 +429,19 @@ const removeFromFavorites = async (req, res) => {
     if (result.rowCount === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Рецепт не знайдений в улюблених'
+        message: 'Recipe not found in favorites'
       });
     }
 
     res.json({
       success: true,
-      message: 'Рецепт видалено з улюблених'
+      message: 'Recipe removed from favorites'
     });
   } catch (error) {
     console.error('Remove from favorites error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при видаленні з улюблених'
+      message: 'Server error while removing from favorites'
     });
   }
 };
@@ -492,7 +492,7 @@ const getFavoriteRecipes = async (req, res) => {
     console.error('Get favorite recipes error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при отриманні улюблених рецептів'
+      message: 'Server error while getting favorite recipes'
     });
   }
 };

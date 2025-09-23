@@ -1,114 +1,114 @@
-# 🚀 Інструкція запуску Foodies Backend API
+# 🚀 Foodies Backend API Setup Instructions
 
-## 🐳 Швидкий старт з Docker (Рекомендовано)
+## 🐳 Quick Start with Docker (Recommended)
 
 ```bash
-# Клонування репозиторію
+# Clone repository
 git clone <repository-url>
 cd final-project-full-stack-api
 
-# Запуск з Docker Compose
+# Run with Docker Compose
 npm run docker:dev
 ```
 
-**Готово!** API доступне на http://localhost:3000
+**Done!** API is available at http://localhost:3000
 
-### Docker команди:
+### Docker commands:
 ```bash
-npm run docker:dev    # Розробка
-npm run docker:prod  # Продакшн  
-npm run docker:down  # Зупинка
-npm run docker:clean # Очищення
+npm run docker:dev    # Development
+npm run docker:prod  # Production  
+npm run docker:down  # Stop
+npm run docker:clean # Clean up
 ```
 
-## 🛠️ Локальна установка
+## 🛠️ Local Installation
 
-### Передумови
+### Prerequisites
 - **Node.js** 18+
 - **PostgreSQL** 14+
-- **npm** або **yarn**
+- **npm** or **yarn**
 
-### 1. Клонування та встановлення
+### 1. Clone and install
 ```bash
-# Клонувати репозиторій
+# Clone repository
 git clone <repository-url>
 cd final-project-full-stack-api
 
-# Встановити залежності
+# Install dependencies
 npm install
 ```
 
-### 2. Встановлення PostgreSQL
+### 2. Install PostgreSQL
 
-#### macOS (з Homebrew):
+#### macOS (with Homebrew):
 ```bash
-# Встановити PostgreSQL
+# Install PostgreSQL
 brew install postgresql@14
 
-# Запустити PostgreSQL
+# Start PostgreSQL
 brew services start postgresql@14
 
-# Створити користувача postgres
+# Create postgres user
 createuser -s postgres
 ```
 
 #### Ubuntu/Debian:
 ```bash
-# Встановити PostgreSQL
+# Install PostgreSQL
 sudo apt update
 sudo apt install postgresql postgresql-contrib
 
-# Створити користувача postgres
+# Create postgres user
 sudo -u postgres createuser -s postgres
 ```
 
 #### Windows:
-- Завантажити PostgreSQL з офіційного сайту
-- Встановити з налаштуваннями за замовчуванням
+- Download PostgreSQL from official website
+- Install with default settings
 
-### 3. Налаштування бази даних
+### 3. Database setup
 ```bash
-# Створити базу даних
+# Create database
 createdb foodies_db
 
-# Копіювати конфігурацію
+# Copy configuration
 cp .env.example .env
 
-# Відредагувати змінні середовища
+# Edit environment variables
 nano .env
 ```
 
-### 4. Міграція та заповнення
+### 4. Migration and seeding
 ```bash
-# Створити таблиці
+# Create tables
 npm run migrate
 
-# Заповнити тестовими даними
+# Seed with test data
 npm run seed
 ```
 
-### 5. Запуск сервера
+### 5. Start server
 ```bash
-# Режим розробки (з автоперезавантаженням)
+# Development mode (with auto-reload)
 npm run dev
 
-# Продакшн режим
+# Production mode
 npm start
 ```
 
-### 6. Тестування
+### 6. Testing
 ```bash
-# Запуск тестів API
+# Run API tests
 npm run test:api
 ```
 
-## 📚 Доступ до сервісів
+## 📚 Service Access
 
 - **API**: http://localhost:3000
-- **Swagger документація**: http://localhost:3000/api-docs
+- **Swagger Documentation**: http://localhost:3000/api-docs
 - **Health Check**: http://localhost:3000/health
 
-## 🔧 Налаштування (.env)
+## 🔧 Configuration (.env)
 
 ```env
 # Database Configuration
@@ -133,7 +133,7 @@ MAX_FILE_SIZE=5242880
 
 ## 🚨 Troubleshooting
 
-### Проблема: `psql not found`
+### Issue: `psql not found`
 ```bash
 # macOS
 brew install postgresql@14
@@ -142,67 +142,67 @@ brew install postgresql@14
 sudo apt install postgresql-client
 ```
 
-### Проблема: `role "postgres" does not exist`
+### Issue: `role "postgres" does not exist`
 ```bash
-# Створити користувача postgres
+# Create postgres user
 createuser -s postgres
 ```
 
-### Проблема: `port 3000 already in use`
+### Issue: `port 3000 already in use`
 ```bash
-# Знайти процес на порту 3000
+# Find process on port 3000
 lsof -i :3000
 
-# Зупинити процес
+# Stop process
 kill -9 <PID>
 ```
 
-### Проблема: `docker-compose: command not found`
+### Issue: `docker-compose: command not found`
 ```bash
-# Встановити Docker Desktop
-# Або використовувати локальну установку
+# Install Docker Desktop
+# Or use local installation
 ```
 
-## 📋 Основні команди
+## 📋 Main Commands
 
 ```bash
-# Розробка
+# Development
 npm run dev
 
-# Продакшн
+# Production
 npm start
 
-# Міграція БД
+# Database migration
 npm run migrate
 
-# Заповнення БД
+# Database seeding
 npm run seed
 
-# Тестування API
+# API testing
 npm run test:api
 
-# Docker розробка
+# Docker development
 npm run docker:dev
 
-# Docker продакшн
+# Docker production
 npm run docker:prod
 ```
 
-## 🎯 Особливості проекту
+## 🎯 Project Features
 
-- ✅ **ES Modules** - сучасний JavaScript
-- ✅ **Docker** - контейнеризація
-- ✅ **RESTful API** - правильні принципи
-- ✅ **JWT авторизація** - безпека
-- ✅ **Swagger документація** - автоматична
-- ✅ **Валідація даних** - express-validator
-- ✅ **Завантаження файлів** - multer
-- ✅ **Безпека** - helmet, rate limiting
+- ✅ **ES Modules** - modern JavaScript
+- ✅ **Docker** - containerization
+- ✅ **RESTful API** - proper principles
+- ✅ **JWT authorization** - security
+- ✅ **Swagger documentation** - automatic
+- ✅ **Data validation** - express-validator
+- ✅ **File uploads** - multer
+- ✅ **Security** - helmet, rate limiting
 
-## 📞 Підтримка
+## 📞 Support
 
-При виникненні проблем:
-1. Перевірте логи сервера
-2. Переконайтеся, що PostgreSQL запущений
-3. Перевірте налаштування в .env файлі
-4. Спробуйте Docker варіант для швидкого старту
+If you encounter issues:
+1. Check server logs
+2. Make sure PostgreSQL is running
+3. Check settings in .env file
+4. Try Docker option for quick start

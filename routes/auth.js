@@ -10,7 +10,7 @@ const router = express.Router();
  * @swagger
  * /api/auth/register:
  *   post:
- *     summary: Реєстрація користувача
+ *     summary: User registration
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -25,7 +25,7 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
- *                 example: "Іван Іванов"
+ *                 example: "John Doe"
  *               email:
  *                 type: string
  *                 format: email
@@ -36,7 +36,7 @@ const router = express.Router();
  *                 example: "password123"
  *     responses:
  *       201:
- *         description: Користувач успішно зареєстрований
+ *         description: User successfully registered
  *         content:
  *           application/json:
  *             schema:
@@ -47,7 +47,7 @@ const router = express.Router();
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Користувач успішно зареєстрований"
+ *                   example: "User successfully registered"
  *                 data:
  *                   type: object
  *                   properties:
@@ -56,7 +56,7 @@ const router = express.Router();
  *                     token:
  *                       type: string
  *       400:
- *         description: Помилка валідації або користувач вже існує
+ *         description: Validation error or user already exists
  *         content:
  *           application/json:
  *             schema:
@@ -66,21 +66,21 @@ router.post('/register', [
   body('name')
     .trim()
     .isLength({ min: 2, max: 100 })
-    .withMessage('Ім\'я повинно містити від 2 до 100 символів'),
+    .withMessage('Name must contain 2 to 100 characters'),
   body('email')
     .isEmail()
     .normalizeEmail()
-    .withMessage('Введіть валідний email'),
+    .withMessage('Enter a valid email'),
   body('password')
     .isLength({ min: 6 })
-    .withMessage('Пароль повинен містити мінімум 6 символів')
+    .withMessage('Password must contain at least 6 characters')
 ], validate, register);
 
 /**
  * @swagger
  * /api/auth/login:
  *   post:
- *     summary: Вхід користувача
+ *     summary: User login
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -101,7 +101,7 @@ router.post('/register', [
  *                 example: "password123"
  *     responses:
  *       200:
- *         description: Успішний вхід
+ *         description: Login successful
  *         content:
  *           application/json:
  *             schema:
@@ -112,7 +112,7 @@ router.post('/register', [
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Успішний вхід"
+ *                   example: "Login successful"
  *                 data:
  *                   type: object
  *                   properties:
@@ -121,7 +121,7 @@ router.post('/register', [
  *                     token:
  *                       type: string
  *       401:
- *         description: Невірні облікові дані
+ *         description: Invalid credentials
  *         content:
  *           application/json:
  *             schema:
@@ -131,23 +131,23 @@ router.post('/login', [
   body('email')
     .isEmail()
     .normalizeEmail()
-    .withMessage('Введіть валідний email'),
+    .withMessage('Enter a valid email'),
   body('password')
     .notEmpty()
-    .withMessage('Пароль обов\'язковий')
+    .withMessage('Password is required')
 ], validate, login);
 
 /**
  * @swagger
  * /api/auth/logout:
  *   post:
- *     summary: Вихід користувача
+ *     summary: User logout
  *     tags: [Auth]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Успішний вихід
+ *         description: Logout successful
  *         content:
  *           application/json:
  *             schema:
@@ -158,7 +158,7 @@ router.post('/login', [
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Успішний вихід"
+ *                   example: "Logout successful"
  */
 router.post('/logout', auth, logout);
 

@@ -18,7 +18,7 @@ const register = async (req, res) => {
     if (existingUser.rows.length > 0) {
       return res.status(400).json({
         success: false,
-        message: 'Користувач з таким email вже існує'
+        message: 'User with this email already exists'
       });
     }
 
@@ -43,7 +43,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Користувач успішно зареєстрований',
+      message: 'User successfully registered',
       data: {
         user,
         token
@@ -53,7 +53,7 @@ const register = async (req, res) => {
     console.error('Register error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при реєстрації'
+      message: 'Server error during registration'
     });
   }
 };
@@ -74,7 +74,7 @@ const login = async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(401).json({
         success: false,
-        message: 'Невірний email або пароль'
+        message: 'Invalid email or password'
       });
     }
 
@@ -85,7 +85,7 @@ const login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
-        message: 'Невірний email або пароль'
+        message: 'Invalid email or password'
       });
     }
 
@@ -101,7 +101,7 @@ const login = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Успішний вхід',
+      message: 'Login successful',
       data: {
         user,
         token
@@ -111,7 +111,7 @@ const login = async (req, res) => {
     console.error('Login error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при вході'
+      message: 'Server error during login'
     });
   }
 };
@@ -123,13 +123,13 @@ const logout = async (req, res) => {
   try {
     res.json({
       success: true,
-      message: 'Успішний вихід'
+      message: 'Logout successful'
     });
   } catch (error) {
     console.error('Logout error:', error);
     res.status(500).json({
       success: false,
-      message: 'Помилка сервера при виході'
+      message: 'Server error during logout'
     });
   }
 };
