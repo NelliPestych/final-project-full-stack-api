@@ -25,7 +25,13 @@ npm run docker:dev
 
 **Готово!** API доступне на http://localhost:3000
 
-Детальні інструкції: [DOCKER_INSTRUCTIONS.md](./DOCKER_INSTRUCTIONS.md)
+### Docker команди:
+```bash
+npm run docker:dev    # Розробка
+npm run docker:prod  # Продакшн  
+npm run docker:down  # Зупинка
+npm run docker:clean # Очищення
+```
 
 ## 📋 Функціональність
 
