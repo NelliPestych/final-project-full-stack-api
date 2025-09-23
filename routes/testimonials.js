@@ -1,5 +1,5 @@
-const express = require('express');
-const { getTestimonials } = require('../controllers/testimonialController');
+import express from 'express';
+import { getTestimonials } from '../controllers/testimonialController.js';
 
 const router = express.Router();
 
@@ -27,4 +27,4 @@ const router = express.Router();
  */
 router.get('/', getTestimonials);
 
-module.exports = router;
+export default router;

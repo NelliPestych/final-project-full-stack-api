@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const pool = require('../config/database');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import pool from '../config/database.js';
 
 // @desc    Register user
 // @route   POST /api/auth/register
@@ -121,9 +121,6 @@ const login = async (req, res) => {
 // @access  Private
 const logout = async (req, res) => {
   try {
-    // In a stateless JWT implementation, logout is handled on the client side
-    // by removing the token. Here we can add token blacklisting if needed.
-    
     res.json({
       success: true,
       message: 'Успішний вихід'
@@ -137,7 +134,7 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   register,
   login,
   logout

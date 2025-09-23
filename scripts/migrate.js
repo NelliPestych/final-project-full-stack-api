@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+import pool from '../config/database.js';
 
 const createTables = async () => {
   try {
@@ -165,4 +165,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { createTables, dropTables };
+export { createTables, dropTables };

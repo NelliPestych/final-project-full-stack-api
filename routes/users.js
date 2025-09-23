@@ -1,6 +1,6 @@
-const express = require('express');
-const { getCurrentUser, getUserById, updateAvatar, getFollowers, getFollowing, followUser, unfollowUser, upload } = require('../controllers/userController');
-const auth = require('../middleware/auth');
+import express from 'express';
+import { getCurrentUser, getUserById, updateAvatar, updateProfile, getFollowers, getFollowing, followUser, unfollowUser, upload } from '../controllers/userController.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -127,6 +127,59 @@ router.put('/avatar', auth, upload.single('avatar'), updateAvatar);
 
 /**
  * @swagger
+ * /api/users/profile:
+ *   patch:
+ *     summary: Частково оновити профіль користувача
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Нове ім'я"
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "new@example.com"
+ *     responses:
+ *       200:
+ *         description: Профіль успішно оновлено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Профіль успішно оновлено"
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Помилка валідації
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       401:
+ *         description: Неавторизований доступ
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
+router.patch('/profile', auth, updateProfile);
+
+/**
+ * @swagger
  * /api/users/followers:
  *   get:
  *     summary: Отримати список підписників
@@ -191,7 +244,7 @@ router.get('/following', auth, getFollowing);
 
 /**
  * @swagger
- * /api/users/follow/{id}:
+ * /api/users/{id}/follow:
  *   post:
  *     summary: Підписатися на користувача
  *     tags: [Users]
@@ -225,11 +278,11 @@ router.get('/following', auth, getFollowing);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.post('/follow/:id', auth, followUser);
+router.post('/:id/follow', auth, followUser);
 
 /**
  * @swagger
- * /api/users/follow/{id}:
+ * /api/users/{id}/follow:
  *   delete:
  *     summary: Відписатися від користувача
  *     tags: [Users]
@@ -263,6 +316,6 @@ router.post('/follow/:id', auth, followUser);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.delete('/follow/:id', auth, unfollowUser);
+router.delete('/:id/follow', auth, unfollowUser);
 
-module.exports = router;
+export default router;

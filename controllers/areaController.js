@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+import pool from '../config/database.js';
 
 // @desc    Get all areas
 // @route   GET /api/areas
@@ -22,6 +22,6 @@ const getAreas = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getAreas
 };

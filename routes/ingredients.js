@@ -1,5 +1,5 @@
-const express = require('express');
-const { getIngredients } = require('../controllers/ingredientController');
+import express from 'express';
+import { getIngredients } from '../controllers/ingredientController.js';
 
 const router = express.Router();
 
@@ -27,4 +27,4 @@ const router = express.Router();
  */
 router.get('/', getIngredients);
 
-module.exports = router;
+export default router;

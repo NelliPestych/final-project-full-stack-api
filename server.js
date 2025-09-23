@@ -1,18 +1,21 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import rateLimit from 'express-rate-limit';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const { errorHandler, notFound } = require('./middleware/errorHandler');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const categoryRoutes = require('./routes/categories');
-const areaRoutes = require('./routes/areas');
-const ingredientRoutes = require('./routes/ingredients');
-const testimonialRoutes = require('./routes/testimonials');
-const recipeRoutes = require('./routes/recipes');
+import { errorHandler, notFound } from './middleware/errorHandler.js';
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+import categoryRoutes from './routes/categories.js';
+import areaRoutes from './routes/areas.js';
+import ingredientRoutes from './routes/ingredients.js';
+import testimonialRoutes from './routes/testimonials.js';
+import recipeRoutes from './routes/recipes.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger.js';
 
 const app = express();
 
@@ -64,8 +67,6 @@ app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/recipes', recipeRoutes);
 
 // Swagger documentation
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Error handling middleware
@@ -80,4 +81,4 @@ app.listen(PORT, () => {
   console.log(`🏥 Health Check: http://localhost:${PORT}/health`);
 });
 
-module.exports = app;
+export default app;
